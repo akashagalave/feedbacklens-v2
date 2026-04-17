@@ -2,7 +2,6 @@ import json
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from langsmith import traceable
-from pydantic import BaseModel
 from .config import settings
 from .prompts import UNDERSTANDING_PROMPT
 import sys
@@ -24,30 +23,19 @@ llm = ChatOpenAI(
 KNOWN_COMPANIES = ["swiggy", "zomato", "uber"]
 
 
-class UnderstandingOutput(BaseModel):
-    company: str
-    intent: str
-    focus: str | None = None
-
-
 def normalize_company(company: str, query: str):
     if not company:
         return None
-
     company = company.lower().strip()
-
     if company in KNOWN_COMPANIES:
         return company
-
     for c in KNOWN_COMPANIES:
         if c in company:
             return c
-
     query = query.lower()
     for c in KNOWN_COMPANIES:
         if c in query:
             return c
-
     return None
 
 
@@ -60,28 +48,39 @@ async def understand_query(query: str, company: str = None) -> dict:
         user_message += f"\nHint - company might be: {company}"
 
     try:
-        llm_structured = llm.with_structured_output(UnderstandingOutput)
-
-        result = await llm_structured.ainvoke([
+        response = await llm.ainvoke([
             SystemMessage(content=UNDERSTANDING_PROMPT),
             HumanMessage(content=user_message)
         ])
 
-        logger.info(f"Raw LLM output: {result}")
+        content = response.content.strip()
+        logger.info(f"RAW LLM CONTENT: {content}")
 
-        extracted_company = normalize_company(result.company, query)
+        if content.startswith("```"):
+            content = content.split("```")[1]
+            if content.startswith("json"):
+                content = content[4:]
+            content = content.strip()
 
-        logger.info(f"Final normalized company: {extracted_company}")
+        result = json.loads(content)
+        extracted_company = normalize_company(result.get("company", ""), query)
 
         final_response = {
             "company": extracted_company or "unknown",
-            "intent": result.intent or "analyze",
-            "focus": result.focus
+            "intent": result.get("intent", "analyze"),
+            "focus": result.get("focus")
         }
 
         logger.info(f"Final structured output: {final_response}")
         return final_response
 
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON parse error: {e}")
+        return {
+            "company": normalize_company(company, query) or "unknown",
+            "intent": "analyze",
+            "focus": None
+        }
     except Exception as e:
         logger.error(f"LLM error: {e}")
         return {

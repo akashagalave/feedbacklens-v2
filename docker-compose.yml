@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
 
   qdrant:
@@ -49,7 +47,7 @@ services:
   understanding-agent:
     build:
       context: .
-      dockerfile: services/understanding-agent/Dockerfile
+      dockerfile: services/understanding_agent/Dockerfile
     container_name: understanding-agent
     ports:
       - "8002:8002"
@@ -59,17 +57,16 @@ services:
   insight-agent:
     build:
       context: .
-      dockerfile: services/insight-agent/Dockerfile
+      dockerfile: services/insight_agent/Dockerfile
     container_name: insight-agent
     ports:
       - "8003:8003"
     env_file:
       - .env
     environment:
-      - QDRANT_HOST=qdrant
+   
       - REDIS_HOST=redis
     depends_on:
-      - qdrant
       - redis
 
   recommendation-agent:

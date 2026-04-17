@@ -1,7 +1,7 @@
+import json
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from langsmith import traceable
-from pydantic import BaseModel
 from .config import settings
 from .prompts import RECOMMENDATION_PROMPT
 import sys
@@ -19,10 +19,6 @@ llm = ChatOpenAI(
     timeout=30,
     api_key=settings.openai_api_key
 )
-
-
-class RecommendationOutput(BaseModel):
-    recommendations: list[str]
 
 
 @traceable(name="recommendation-agent")
@@ -43,16 +39,27 @@ Patterns:
 """
 
     try:
-        llm_structured = llm.with_structured_output(RecommendationOutput)
-
-        result = await llm_structured.ainvoke([
+        response = await llm.ainvoke([
             SystemMessage(content=RECOMMENDATION_PROMPT),
             HumanMessage(content=context)
         ])
 
-        logger.info(f"Recommendations generated for {company}")
-        return {"recommendations": result.recommendations}
+        content = response.content.strip()
+        logger.info(f"RAW LLM CONTENT: {content}")
 
+        if content.startswith("```"):
+            content = content.split("```")[1]
+            if content.startswith("json"):
+                content = content[4:]
+            content = content.strip()
+
+        result = json.loads(content)
+        logger.info(f"Recommendations generated for {company}")
+        return {"recommendations": result.get("recommendations", [])}
+
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON parse error: {e}")
+        return {"recommendations": ["Unable to generate recommendations"]}
     except Exception as e:
         logger.error(f"LLM error: {e}")
         raise

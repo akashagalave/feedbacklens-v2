@@ -7,10 +7,11 @@ embedding:
   batch_size: 64
 
 qdrant:
-  host: https://ce4ff150-3c44-46e7-b298-5299502f83a9.us-east-1-1.aws.cloud.qdrant.io
+  host: https://adc13c31-71c6-4ff9-a316-a2d8a85d7889.us-east-1-1.aws.cloud.qdrant.io:6333
   port: 6333
   collection_name: feedbacklens
   api_key: ""
+  
 redis:
   host: localhost
   port: 6379

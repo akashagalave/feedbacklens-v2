@@ -1,56 +1,37 @@
-## Abhi ye karo ek ek karke
+**FULL SYSTEM WORKING PERFECTLY!** 🔥🔥🔥
+
+```json
+top_issues: ["delivery delay", "high delivery charges", "poor delivery executive quality"]
+patterns: ["frequent delivery delays", "positive feedback on offers", "concerns about delivery staff"]
+recommendations: [
+  "Implement real-time tracking system...",
+  "Introduce tiered pricing model...", 
+  "Establish training program for delivery executives..."
+]
+confidence_score: 0.87
+sample_reviews: [3 reviews]
+```
 
 ---
 
-## Step 1 — Sab files commit karo
+## Commit karo aur ECR/EKS shuru karte hain
 
-```bash
+```powershell
 git add .
-git commit -m "feat: langsmith integration + async redis + qdrant pool fix"
+git commit -m "feat: all prompts fixed - full pipeline working end to end"
 git push origin main
 ```
 
 ---
 
-## Step 2 — Local test karo docker-compose se
-
-Redis locally chahiye pehle:
-
-```bash
-docker-compose up -d redis
-```
-
-Phir services start karo:
-
-```bash
-docker-compose up --build
-```
-
----
-
-## Step 3 — Test karo locally
-
-```bash
-curl -X POST "http://localhost:8000/analyze" \
-  -H "Content-Type: application/json" \
-  -d '{"query": "swiggy delivery issues", "company": "swiggy"}'
-```
-
-PowerShell me:
+## ECR repos create karo (5 services)
 
 ```powershell
-Invoke-WebRequest -Uri "http://localhost:8000/analyze" `
-  -Method POST `
-  -ContentType "application/json" `
-  -Body '{"query": "swiggy delivery issues", "company": "swiggy"}'
+aws ecr create-repository --repository-name feedbacklens-gateway --region us-east-1
+aws ecr create-repository --repository-name feedbacklens-orchestrator --region us-east-1
+aws ecr create-repository --repository-name feedbacklens-understanding-agent --region us-east-1
+aws ecr create-repository --repository-name feedbacklens-insight-agent --region us-east-1
+aws ecr create-repository --repository-name feedbacklens-recommendation-agent --region us-east-1
 ```
 
----
-
-## Step 4 — LangSmith dashboard check karo
-
-**https://smith.langchain.com** pe jao — `feedbacklens-v2` project me traces dikhne chahiye.
-
----
-
-Karo ye aur output batao — error aaye ya success dono cases me. Phir ECR/EKS shuru karte hain.
+Output paste karo — phir docker images build aur push karte hain ECR pe.

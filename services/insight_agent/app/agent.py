@@ -6,6 +6,7 @@ from .config import settings
 from .prompts import INSIGHT_PROMPT
 from .hybrid_search import hybrid_search
 from .cache import make_cache_key, get_cached, set_cache
+import json
 import sys
 import os
 
@@ -21,12 +22,6 @@ llm = ChatOpenAI(
     timeout=30,
     api_key=settings.openai_api_key
 )
-
-
-class InsightOutput(BaseModel):
-    top_issues: list[str]
-    patterns: list[str]
-    confidence_score: float
 
 
 @traceable(name="insight-agent")
@@ -61,25 +56,42 @@ async def generate_insights(
     logger.info(f"Retrieved {len(chunks)} chunks for {company}")
 
     try:
-        llm_structured = llm.with_structured_output(InsightOutput)
-
-        result = await llm_structured.ainvoke([
+        response = await llm.ainvoke([
             SystemMessage(content=INSIGHT_PROMPT),
             HumanMessage(content=f"Company: {company}\n\nReviews:\n{reviews_text}")
         ])
 
+        content = response.content.strip()
+        logger.info(f"RAW LLM CONTENT: {content}")
+
+        if content.startswith("```"):
+            content = content.split("```")[1]
+            if content.startswith("json"):
+                content = content[4:]
+            content = content.strip()
+
+        result = json.loads(content)
+        logger.info(f"PARSED RESULT: {result}")
+
         final = {
-            "top_issues": result.top_issues,
-            "patterns": result.patterns,
+            "top_issues": result.get("top_issues", []),
+            "patterns": result.get("patterns", []),
             "sample_reviews": sample_reviews,
-            "confidence_score": result.confidence_score
+            "confidence_score": result.get("confidence_score", 0.0)
         }
 
         await set_cache(cache_key, final)
-
-        logger.info(f"Insights generated for {company}")
+        logger.info(f"Insights generated: {final['top_issues']}")
         return final
 
+    except json.JSONDecodeError as e:
+        logger.error(f"JSON parse error: {e}, content: {content}")
+        return {
+            "top_issues": ["Error parsing insights"],
+            "patterns": [],
+            "sample_reviews": sample_reviews,
+            "confidence_score": 0.0
+        }
     except Exception as e:
         logger.error(f"LLM error: {e}")
         raise

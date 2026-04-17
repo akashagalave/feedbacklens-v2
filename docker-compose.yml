@@ -1,0 +1,86 @@
+version: "3.9"
+
+services:
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  gateway:
+    build:
+      context: .
+      dockerfile: services/gateway/Dockerfile
+    container_name: gateway
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - orchestrator
+
+  orchestrator:
+    build:
+      context: .
+      dockerfile: services/orchestrator/Dockerfile
+    container_name: orchestrator
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    environment:
+      - UNDERSTANDING_AGENT_URL=http://understanding-agent:8002
+      - INSIGHT_AGENT_URL=http://insight-agent:8003
+      - RECOMMENDATION_AGENT_URL=http://recommendation-agent:8004
+    depends_on:
+      - understanding-agent
+      - insight-agent
+      - recommendation-agent
+
+  understanding-agent:
+    build:
+      context: .
+      dockerfile: services/understanding-agent/Dockerfile
+    container_name: understanding-agent
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env
+
+  insight-agent:
+    build:
+      context: .
+      dockerfile: services/insight-agent/Dockerfile
+    container_name: insight-agent
+    ports:
+      - "8003:8003"
+    env_file:
+      - .env
+    environment:
+      - QDRANT_HOST=qdrant
+      - REDIS_HOST=redis
+    depends_on:
+      - qdrant
+      - redis
+
+  recommendation-agent:
+    build:
+      context: .
+      dockerfile: services/recommendation-agent/Dockerfile
+    container_name: recommendation-agent
+    ports:
+      - "8004:8004"
+    env_file:
+      - .env
+
+volumes:
+  qdrant_storage:

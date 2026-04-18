@@ -3,11 +3,14 @@ kind: Service
 metadata:
   name: gateway
   namespace: feedbacklens
+  labels:
+    app: gateway
 spec:
   selector:
     app: gateway
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 8000
       targetPort: 8000
   type: LoadBalancer

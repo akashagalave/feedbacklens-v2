@@ -7,4 +7,5 @@ prometheus-client==0.20.0
 loguru==0.7.2
 prometheus-fastapi-instrumentator==6.1.0
 pydantic-settings==2.2.1
+slowapi==0.1.9
 

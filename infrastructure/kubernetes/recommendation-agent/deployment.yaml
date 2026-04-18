@@ -21,10 +21,29 @@ spec:
           envFrom:
             - secretRef:
                 name: feedbacklens-secrets
+          env:
+            - name: LANGSMITH_TRACING
+              value: "true"
+            - name: LANGSMITH_PROJECT
+              value: "feedbacklens-v2"
+            - name: LANGSMITH_ENDPOINT
+              value: "https://api.smith.langchain.com"
           resources:
             requests:
               memory: "256Mi"
-              cpu: "250m"
+              cpu: "200m"
             limits:
               memory: "512Mi"
-              cpu: "500m"
+              cpu: "400m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8004
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8004
+            initialDelaySeconds: 30
+            periodSeconds: 10

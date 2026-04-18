@@ -7,6 +7,7 @@ spec:
   selector:
     app: recommendation-agent
   ports:
-    - port: 8004
+    - protocol: TCP
+      port: 8004
       targetPort: 8004
   type: ClusterIP

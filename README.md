@@ -1,37 +1,62 @@
-**FULL SYSTEM WORKING PERFECTLY!** 🔥🔥🔥
+## HPA Decision
 
-```json
-top_issues: ["delivery delay", "high delivery charges", "poor delivery executive quality"]
-patterns: ["frequent delivery delays", "positive feedback on offers", "concerns about delivery staff"]
-recommendations: [
-  "Implement real-time tracking system...",
-  "Introduce tiered pricing model...", 
-  "Establish training program for delivery executives..."
-]
-confidence_score: 0.87
-sample_reviews: [3 reviews]
+Bhai pehle HPA clear karte hain:
+
+**Old project me kya tha:** Sirf gateway aur orchestrator pe HPA tha — understanding aur recommendation agent pe nahi tha. Ye correct approach hai.
+
+**Is project me maine sab pe HPA diya** — ye galat tha, tune sahi pakda.
+
+**Production standard kya hai:**
+
+```
+Gateway      → HPA ✅ (public traffic face karta hai)
+Orchestrator → HPA ✅ (gateway ke requests handle karta hai)
+Insight agent → HPA ✅ (heavy operation — Qdrant + LLM)
+Understanding → ❌ NO HPA (lightweight, fast, rarely bottleneck)
+Recommendation → ❌ NO HPA (lightweight, fast, rarely bottleneck)
+```
+
+Toh **3 HPA files rakho, 2 delete karo:**
+
+```powershell
+# Delete these 2
+del infrastructure/kubernetes/understanding-agent/hpa.yaml
+del infrastructure/kubernetes/recommendation-agent/hpa.yaml
+```
+
+Keep karo:
+```
+gateway/hpa.yaml          ✅
+orchestrator/hpa.yaml     ✅
+insight-agent/hpa.yaml    ✅
 ```
 
 ---
 
-## Commit karo aur ECR/EKS shuru karte hain
+## ragas_eval.py Decision
+
+**Haan — delete karo.** Ab `langsmith_eval.py` me RAGAS fully integrated hai. Purana file redundant hai.
+
+```powershell
+del ragas_eval.py
+```
+
+---
+
+## Commit karo
 
 ```powershell
 git add .
-git commit -m "feat: all prompts fixed - full pipeline working end to end"
+git commit -m "chore: remove redundant ragas_eval.py and unnecessary HPA files"
 git push origin main
 ```
 
 ---
 
-## ECR repos create karo (5 services)
+## EKS ka kya status hai?
 
 ```powershell
-aws ecr create-repository --repository-name feedbacklens-gateway --region us-east-1
-aws ecr create-repository --repository-name feedbacklens-orchestrator --region us-east-1
-aws ecr create-repository --repository-name feedbacklens-understanding-agent --region us-east-1
-aws ecr create-repository --repository-name feedbacklens-insight-agent --region us-east-1
-aws ecr create-repository --repository-name feedbacklens-recommendation-agent --region us-east-1
+eksctl get cluster --region us-east-1
 ```
 
-Output paste karo — phir docker images build aur push karte hain ECR pe.
+Paste karo — ready hoga toh deployment shuru karte hain.

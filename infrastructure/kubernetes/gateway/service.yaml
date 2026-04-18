@@ -7,6 +7,7 @@ spec:
   selector:
     app: gateway
   ports:
-    - port: 8000
+    - protocol: TCP
+      port: 8000
       targetPort: 8000
-  type: LoadBalancer  #external access , ye hi public endpoint hai
+  type: LoadBalancer

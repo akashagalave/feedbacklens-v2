@@ -27,12 +27,35 @@ spec:
                 secretKeyRef:
                   name: feedbacklens-secrets
                   key: QDRANT_HOST
+            - name: QDRANT_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: feedbacklens-secrets
+                  key: QDRANT_API_KEY
             - name: REDIS_HOST
               value: "redis"
+            - name: LANGSMITH_TRACING
+              value: "true"
+            - name: LANGSMITH_PROJECT
+              value: "feedbacklens-v2"
+            - name: LANGSMITH_ENDPOINT
+              value: "https://api.smith.langchain.com"
           resources:
             requests:
               memory: "1Gi"
               cpu: "500m"
             limits:
-              memory: "2Gi"
+              memory: "3Gi"
               cpu: "1000m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8003
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8003
+            initialDelaySeconds: 90
+            periodSeconds: 15

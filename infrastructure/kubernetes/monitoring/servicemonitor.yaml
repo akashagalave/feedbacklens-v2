@@ -4,7 +4,7 @@ metadata:
   name: feedbacklens-monitor
   namespace: feedbacklens
   labels:
-    release: monitoring
+    release: prometheus
 spec:
   selector:
     matchLabels:
@@ -12,4 +12,4 @@ spec:
   endpoints:
     - port: "8000"
       path: /metrics
-      interval: 15s
+      interval: 30s

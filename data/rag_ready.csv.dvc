@@ -1,5 +1,5 @@
 outs:
-- md5: 15366f41147fdfe6b515c3b58ffeb353
-  size: 297034
+- md5: a8508bf9da9b6b55091a4e05060841e1
+  size: 60882
   hash: md5
   path: rag_ready.csv

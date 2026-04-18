@@ -1,0 +1,2025 @@
+{
+  "config": {
+    "semantic_threshold": 0.4,
+    "relevance_pass": 0.6,
+    "recommendation_pass": 0.5,
+    "calibration_gap_max": 0.3,
+    "judge_strategy": "hybrid (LLM 70% + rule-based 30%)",
+    "gateway_url": "http://a5217d661185d40c49586074b21ce5e1-606823893.us-east-1.elb.amazonaws.com:8000"
+  },
+  "summary": {
+    "total": 50,
+    "passed": 0,
+    "pass_rate": 0.0,
+    "avg_relevance": 0.243,
+    "avg_recommendation_score": 0.934,
+    "avg_precision_at_k": 0.207,
+    "avg_recall_at_k": 0.233,
+    "avg_f1": 0.217,
+    "avg_latency_seconds": 4.89,
+    "p95_latency_seconds": 7.98,
+    "confidence_calibrated_rate": 0.0,
+    "beats_baseline_rate": 0.24,
+    "ragas_metrics": {},
+    "category_breakdown": {
+      "normal": 0.194,
+      "ambiguous": 0.002,
+      "noisy": 0.0,
+      "edge": 0.266,
+      "specific": 0.02,
+      "comparison": 0.245,
+      "sentiment": 0.39
+    }
+  },
+  "results": [
+    {
+      "query": "What are swiggy delivery issues?",
+      "company": "swiggy",
+      "category": "normal",
+      "generated_issues": [
+        "high delivery charges",
+        "poor customer support",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a tiered delivery charge system based on distance and order value to reduce costs for customers on larger orders.",
+        "Enhance customer support by introducing a live chat feature within the app, allowing for real-time assistance and quicker resolution of issues.",
+        "Optimize delivery routes using AI algorithms to minimize delays and improve overall delivery speed, ensuring timely arrivals.",
+        "Introduce a loyalty program that rewards frequent users with discounts or free delivery options to increase customer retention.",
+        "Conduct regular training sessions for customer support staff to improve service quality and ensure consistent, satisfactory interactions."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 5.21,
+      "relevance_score": 0.434,
+      "llm_score": 0.5,
+      "rule_score": 0.28,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues mentioned are somewhat relevant but lack specificity and depth regarding delivery issues.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.8,
+      "recommendation_reasoning": "Most recommendations directly address the identified issues with specific solutions, but some suggestions like 'conduct regular training sessions' are too generic.",
+      "precision_at_k": 0.667,
+      "recall_at_k": 0.667,
+      "f1": 0.667,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.434,
+        "gap": 0.416,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "What do customers complain about swiggy?",
+      "company": "swiggy",
+      "category": "normal",
+      "generated_issues": [
+        "customer support issue",
+        "delivery delay",
+        "high delivery charges"
+      ],
+      "recommendations": [
+        "Implement a 24/7 live chat support feature to address customer queries in real-time, reducing response times and improving customer satisfaction.",
+        "Introduce a predictive delivery time feature that uses historical data and real-time traffic updates to provide customers with more accurate delivery estimates.",
+        "Offer a loyalty program that rewards frequent customers with discounts on delivery charges, encouraging repeat business and reducing the perception of high costs."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 3.45,
+      "relevance_score": 0.44,
+      "llm_score": 0.5,
+      "rule_score": 0.3,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are somewhat relevant but lack specificity and depth, making them appear generic.",
+      "is_generic": false,
+      "theme_overlap": 0.5,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly enhancing customer support and improving delivery experience. However, the loyalty program could be seen as a more indirect solution to high delivery charges.",
+      "precision_at_k": 0.667,
+      "recall_at_k": 0.667,
+      "f1": 0.667,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.44,
+        "gap": 0.41,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "What are swiggy customer support problems?",
+      "company": "swiggy",
+      "category": "normal",
+      "generated_issues": [
+        "poor customer support",
+        "high delivery charges",
+        "fake restaurant ratings",
+        "missing items in orders",
+        "unhygienic food delivery"
+      ],
+      "recommendations": [
+        "Implement a 24/7 live chat support feature that connects customers with trained representatives to resolve issues in real-time.",
+        "Introduce a tiered delivery charge system based on distance and order value, offering discounts for larger orders to incentivize usage.",
+        "Establish a verification process for restaurant ratings, including regular audits and customer feedback mechanisms to ensure authenticity.",
+        "Create a standardized checklist for delivery personnel to verify order completeness before leaving the restaurant, reducing instances of missing items.",
+        "Partner with local health authorities to ensure all delivery personnel are trained in hygiene practices and provide them with branded hygiene kits to promote safe delivery."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 4.67,
+      "relevance_score": 0.45,
+      "llm_score": 0.5,
+      "rule_score": 0.333,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "While some issues relate to customer support, others are off-topic and too generic.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.333,
+      "f1": 0.25,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.45,
+        "gap": 0.4,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "What are the top issues with swiggy app?",
+      "company": "swiggy",
+      "category": "normal",
+      "generated_issues": [
+        "poor customer service",
+        "delivery issues",
+        "payment and refund problems",
+        "inaccurate restaurant ratings"
+      ],
+      "recommendations": [
+        "Implement a dedicated customer support chat feature within the app to provide real-time assistance and reduce response times for customer inquiries.",
+        "Enhance the delivery tracking system by providing customers with live updates and estimated delivery times, along with a contingency plan for delays.",
+        "Revamp the payment system to include multiple payment options and ensure a seamless refund process, with automatic notifications sent to customers upon initiation and completion of refunds.",
+        "Establish a verification process for restaurant ratings by implementing a system that flags and reviews ratings that deviate significantly from average scores to ensure accuracy."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 7.89,
+      "relevance_score": 0.015,
+      "llm_score": 0.0,
+      "rule_score": 0.05,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are generic and do not specifically address the app's performance or technical aspects.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues with actionable solutions, though some could be more detailed in implementation.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.015,
+        "gap": 0.835,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Why are swiggy customers unhappy?",
+      "company": "swiggy",
+      "category": "normal",
+      "generated_issues": [
+        "poor customer support",
+        "high delivery charges",
+        "lack of attractive offers",
+        "inconsistent restaurant quality"
+      ],
+      "recommendations": [
+        "Implement a 24/7 live chat support feature to address customer inquiries and complaints in real-time.",
+        "Introduce a tiered delivery fee structure based on distance and order value, offering lower fees for larger orders to incentivize purchases.",
+        "Launch a loyalty program that rewards frequent customers with exclusive discounts and offers to enhance customer retention.",
+        "Establish a quality assurance program that includes regular restaurant audits and customer feedback loops to ensure consistent food quality."
+      ],
+      "confidence_score": 0.87,
+      "latency_seconds": 4.44,
+      "relevance_score": 0.47,
+      "llm_score": 0.5,
+      "rule_score": 0.4,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "Some issues are relevant but lack specificity and depth.",
+      "is_generic": false,
+      "theme_overlap": 0.667,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, providing actionable solutions.",
+      "precision_at_k": 0.75,
+      "recall_at_k": 1.0,
+      "f1": 0.857,
+      "calibration": {
+        "confidence": 0.87,
+        "relevance": 0.47,
+        "gap": 0.4,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "What is wrong with swiggy delivery?",
+      "company": "swiggy",
+      "category": "normal",
+      "generated_issues": [
+        "delivery delay",
+        "wrong orders",
+        "customer support issue",
+        "offer issue"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system for deliveries that provides customers with accurate ETAs and updates on their order status.",
+        "Enhance the order verification process by introducing a double-check system where delivery personnel confirm the order contents with customers before leaving the restaurant.",
+        "Expand customer support availability by introducing a 24/7 chat support feature within the app to address issues immediately and reduce response times.",
+        "Create a feedback loop where customers can rate their delivery experience and report issues directly after receiving their order, allowing for quicker resolution and data collection.",
+        "Launch a targeted campaign to inform customers about ongoing offers and ensure that promotions are clearly visible in the app to reduce confusion."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 5.46,
+      "relevance_score": 0.43,
+      "llm_score": 0.5,
+      "rule_score": 0.267,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues identified are somewhat relevant but too generic and do not specifically address the nuances of delivery problems.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.8,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, but some could be more tailored to individual problems.",
+      "precision_at_k": 0.25,
+      "recall_at_k": 0.333,
+      "f1": 0.286,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.43,
+        "gap": 0.42,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Swiggy complaints about food quality",
+      "company": "swiggy",
+      "category": "normal",
+      "generated_issues": [
+        "delivery delay",
+        "food quality",
+        "customer support",
+        "payment/refund issue"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system that provides customers with accurate ETAs and updates on their delivery status to reduce perceived delivery delays.",
+        "Establish a quality assurance program that includes regular checks on food preparation and delivery processes to maintain food quality standards.",
+        "Enhance customer support training to improve communication skills and empower agents to resolve issues more effectively, including a dedicated team for urgent queries.",
+        "Introduce a streamlined payment and refund process with clear guidelines and automated notifications to keep customers informed about their transaction status.",
+        "Create a feedback loop where customers can rate their delivery experience and food quality, allowing for continuous improvement based on real-time data."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 3.94,
+      "relevance_score": 0.518,
+      "llm_score": 0.5,
+      "rule_score": 0.56,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues include relevant themes but also contain generic issues like 'delivery delay' and 'customer support' that do not specifically address food quality complaints.",
+      "is_generic": false,
+      "theme_overlap": 0.667,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues with actionable solutions, though some could be more detailed.",
+      "precision_at_k": 0.25,
+      "recall_at_k": 0.333,
+      "f1": 0.286,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.518,
+        "gap": 0.332,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.4,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Swiggy refund problems",
+      "company": "swiggy",
+      "category": "normal",
+      "generated_issues": [
+        "payment/refund issue",
+        "delivery delay",
+        "customer service responsiveness"
+      ],
+      "recommendations": [
+        "Implement a real-time order tracking system that provides customers with live updates on their delivery status to reduce perceived delivery delays.",
+        "Establish a dedicated team to handle payment and refund issues, ensuring that all requests are resolved within 24 hours to improve customer satisfaction.",
+        "Create a standardized checklist for delivery personnel to verify order completeness before leaving the restaurant, minimizing the occurrence of missing items.",
+        "Enhance customer service training programs focusing on empathy and problem-solving skills to improve overall responsiveness and customer experience.",
+        "Regularly audit pricing to ensure consistency with restaurant menus and provide transparent communication to customers regarding any discrepancies."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 3.97,
+      "relevance_score": 0.14,
+      "llm_score": 0.2,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues generated are somewhat related to the query but are too generic and do not specifically address refund problems.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.8,
+      "recommendation_reasoning": "Most recommendations directly address the identified issues with specific actions, but some could be more tailored to the unique challenges of each issue.",
+      "precision_at_k": 0.333,
+      "recall_at_k": 0.333,
+      "f1": 0.333,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.14,
+        "gap": 0.76,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Swiggy delivery charges too high",
+      "company": "swiggy",
+      "category": "normal",
+      "generated_issues": [
+        "high delivery charges",
+        "hidden surge charges",
+        "wrong orders and delivery delays"
+      ],
+      "recommendations": [
+        "Implement a transparent pricing model that clearly outlines delivery charges and any potential surge pricing before the customer confirms their order.",
+        "Introduce a loyalty program that offers discounts or credits for frequent users to offset high delivery charges and encourage repeat business.",
+        "Enhance order accuracy by integrating a double-check system where the delivery personnel confirm the order with the customer before leaving the restaurant."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 3.59,
+      "relevance_score": 0.482,
+      "llm_score": 0.5,
+      "rule_score": 0.44,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues identified are somewhat relevant to the query but include generic complaints that do not specifically address the high delivery charges mentioned.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations directly address the identified issues with specific actions, particularly the transparent pricing model for delivery charges and the double-check system for order accuracy.",
+      "precision_at_k": 0.667,
+      "recall_at_k": 0.667,
+      "f1": 0.667,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.482,
+        "gap": 0.368,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "Swiggy executive behavior issues",
+      "company": "swiggy",
+      "category": "normal",
+      "generated_issues": [
+        "poor customer support",
+        "rude delivery executives",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a 24/7 customer support chat feature within the app to address customer queries and complaints in real-time.",
+        "Establish a training program for delivery executives focusing on customer service skills, including communication and conflict resolution.",
+        "Introduce a real-time tracking system with proactive notifications to keep customers informed about their order status and potential delays."
+      ],
+      "confidence_score": 0.87,
+      "latency_seconds": 4.63,
+      "relevance_score": 0.41,
+      "llm_score": 0.5,
+      "rule_score": 0.2,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "While some issues relate to executive behavior, 'poor customer support' and 'delivery delays' are too generic and not specifically about executive behavior.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses the specific issues identified, providing actionable and targeted solutions.",
+      "precision_at_k": 0.333,
+      "recall_at_k": 0.333,
+      "f1": 0.333,
+      "calibration": {
+        "confidence": 0.87,
+        "relevance": 0.41,
+        "gap": 0.46,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "What are uber pricing problems?",
+      "company": "uber",
+      "category": "normal",
+      "generated_issues": [
+        "inaccurate distance measurement",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that allows customers to see the distance being measured during their ride or delivery, ensuring transparency.",
+        "Introduce a pricing calculator that provides customers with an estimated fare before booking, including potential surge pricing, to improve pricing transparency.",
+        "Enhance communication with customers during delivery by providing proactive updates on estimated arrival times and reasons for any delays to manage expectations."
+      ],
+      "confidence_score": 0.8,
+      "latency_seconds": 3.79,
+      "relevance_score": 0.41,
+      "llm_score": 0.5,
+      "rule_score": 0.2,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "Issues are somewhat relevant but lack specificity and depth regarding pricing problems.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with clear, actionable solutions.",
+      "precision_at_k": 0.333,
+      "recall_at_k": 0.333,
+      "f1": 0.333,
+      "calibration": {
+        "confidence": 0.8,
+        "relevance": 0.41,
+        "gap": 0.39,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "Why do uber customers complain?",
+      "company": "uber",
+      "category": "normal",
+      "generated_issues": [
+        "inaccurate distance measurement",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that allows customers to see the distance being measured during their ride or delivery, ensuring transparency and accuracy.",
+        "Introduce a surge pricing calculator that provides customers with an estimated fare before confirming their ride, including potential surge charges based on demand patterns.",
+        "Enhance the delivery tracking system to provide customers with live updates on their order status, including estimated arrival times and reasons for any delays."
+      ],
+      "confidence_score": 0.82,
+      "latency_seconds": 4.46,
+      "relevance_score": 0.28,
+      "llm_score": 0.4,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues identified are somewhat relevant but lack specificity to the expected themes of cancellation, driver, and price.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with clear, actionable solutions that enhance transparency and customer experience.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.82,
+        "relevance": 0.28,
+        "gap": 0.54,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Uber driver cancellation issues",
+      "company": "uber",
+      "category": "normal",
+      "generated_issues": [
+        "inaccurate distance reporting",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that updates customers on the distance and estimated time of arrival, ensuring accuracy and transparency.",
+        "Introduce a surge pricing notification system that alerts customers before they request a ride, providing a clear explanation of the factors leading to surge charges.",
+        "Enhance delivery tracking capabilities by providing customers with live updates on their order status, including estimated delivery time adjustments due to unforeseen delays."
+      ],
+      "confidence_score": 0.8,
+      "latency_seconds": 5.68,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues do not relate to cancellation issues specifically and are too generic.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.8,
+        "relevance": 0.0,
+        "gap": 0.8,
+        "calibrated": false,
+        "penalty": 0.2
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Uber app problems",
+      "company": "uber",
+      "category": "normal",
+      "generated_issues": [
+        "inaccurate distance reporting",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that provides customers with live updates on their journey, ensuring accuracy and transparency.",
+        "Introduce a pricing calculator in the app that allows customers to estimate potential surge charges before confirming their ride or delivery, improving pricing transparency.",
+        "Enhance communication protocols for delivery delays by sending proactive notifications to customers about their order status and estimated delivery times."
+      ],
+      "confidence_score": 0.8,
+      "latency_seconds": 3.91,
+      "relevance_score": 0.35,
+      "llm_score": 0.5,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues are somewhat relevant to the app but lack specificity and depth related to the themes.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions that enhance customer experience and transparency.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.8,
+        "relevance": 0.35,
+        "gap": 0.45,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "What is wrong with uber service?",
+      "company": "uber",
+      "category": "normal",
+      "generated_issues": [
+        "inaccurate distance reporting",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that updates users on the distance and estimated time of arrival, ensuring accuracy in reporting.",
+        "Introduce a transparent surge pricing notification system that alerts users of potential surge charges before they confirm their ride or delivery, allowing them to make informed decisions.",
+        "Enhance the delivery tracking system with live updates and estimated delivery time adjustments based on real-time traffic conditions to minimize delivery delays."
+      ],
+      "confidence_score": 0.8,
+      "latency_seconds": 3.79,
+      "relevance_score": 0.35,
+      "llm_score": 0.5,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues identified are somewhat relevant but lack specificity and depth regarding the service experience.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.8,
+        "relevance": 0.35,
+        "gap": 0.45,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Uber safety concerns",
+      "company": "uber",
+      "category": "normal",
+      "generated_issues": [
+        "inaccurate distance reporting",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that provides customers with live updates on their trip distance and estimated arrival time, reducing inaccuracies in distance reporting.",
+        "Introduce a pricing transparency tool that allows customers to see a breakdown of surge pricing factors in real-time, helping them understand why charges may fluctuate.",
+        "Enhance the delivery tracking system to provide customers with proactive notifications about potential delays, including reasons for delays and estimated new delivery times."
+      ],
+      "confidence_score": 0.87,
+      "latency_seconds": 3.67,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues do not address safety concerns directly and are generic in nature.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions that enhance customer experience and transparency.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.87,
+        "relevance": 0.0,
+        "gap": 0.87,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Uber customer support issues",
+      "company": "uber",
+      "category": "normal",
+      "generated_issues": [
+        "inaccurate distance reporting",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that updates users on their trip progress and expected arrival time, reducing inaccuracies in distance reporting.",
+        "Introduce a transparent surge pricing notification system that alerts users of potential surge charges before they confirm their ride or delivery, allowing them to make informed decisions.",
+        "Enhance the delivery tracking system with live updates and estimated delivery times, providing users with accurate information to manage their expectations and reduce frustration."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 3.74,
+      "relevance_score": 0.14,
+      "llm_score": 0.2,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues listed are somewhat related to Uber's service but do not directly address customer support issues specifically.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.14,
+        "gap": 0.71,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Uber surge pricing complaints",
+      "company": "uber",
+      "category": "normal",
+      "generated_issues": [
+        "delivery delay",
+        "surge pricing",
+        "inaccurate distance measurement"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system for deliveries that provides customers with accurate ETAs and updates on their order status to reduce perceived delivery delays.",
+        "Introduce a transparent surge pricing notification system that alerts users of potential price increases before they confirm their ride or order, allowing them to make informed decisions.",
+        "Enhance the GPS and mapping technology used for distance measurement by integrating advanced algorithms that account for real-time traffic conditions to ensure accurate fare calculations."
+      ],
+      "confidence_score": 0.8,
+      "latency_seconds": 3.33,
+      "relevance_score": 0.26,
+      "llm_score": 0.2,
+      "rule_score": 0.4,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues generated include 'surge pricing', which is relevant, but 'delivery delay' and 'inaccurate distance measurement' are not directly related to surge pricing complaints.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions that enhance customer experience and operational efficiency.",
+      "precision_at_k": 0.333,
+      "recall_at_k": 0.333,
+      "f1": 0.333,
+      "calibration": {
+        "confidence": 0.8,
+        "relevance": 0.26,
+        "gap": 0.54,
+        "calibrated": false,
+        "penalty": 0.2
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "Uber ride cancellation by driver",
+      "company": "uber",
+      "category": "normal",
+      "generated_issues": [
+        "delivery delay",
+        "surge pricing",
+        "inaccurate distance measurement"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system that provides customers with live updates on their delivery status to reduce perceived delivery delays.",
+        "Introduce a transparent surge pricing notification system that explains the reasons for price increases, allowing customers to make informed decisions before confirming their orders.",
+        "Enhance the GPS accuracy by integrating advanced mapping technologies and regularly updating the distance measurement algorithms to ensure more precise distance calculations."
+      ],
+      "confidence_score": 0.8,
+      "latency_seconds": 5.34,
+      "relevance_score": 0.14,
+      "llm_score": 0.2,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are not directly related to the cancellation by the driver and are more generic concerns about the service.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.8,
+        "relevance": 0.14,
+        "gap": 0.66,
+        "calibrated": false,
+        "penalty": 0.2
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Uber long wait time problems",
+      "company": "uber",
+      "category": "normal",
+      "generated_issues": [
+        "inaccurate distance measurement",
+        "unexpected surge charges",
+        "performance inconsistency"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that updates customers on the distance and estimated time of arrival during their ride, ensuring accuracy and transparency.",
+        "Introduce a surge pricing notification system that alerts customers of potential surge charges before they confirm their ride, allowing them to make informed decisions.",
+        "Establish a driver performance rating system that allows customers to provide feedback after each ride, and use this data to provide targeted training for drivers with consistently low ratings."
+      ],
+      "confidence_score": 0.82,
+      "latency_seconds": 5.41,
+      "relevance_score": 0.14,
+      "llm_score": 0.2,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues mentioned do not directly address the specific problems related to long wait times, making them somewhat off-topic.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.82,
+        "relevance": 0.14,
+        "gap": 0.68,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "What issues do zomato customers face?",
+      "company": "zomato",
+      "category": "normal",
+      "generated_issues": [
+        "poor service",
+        "waste of money",
+        "dissatisfaction with refunds"
+      ],
+      "recommendations": [
+        "Implement a real-time service tracking system that allows customers to see the status of their orders and estimated delivery times, reducing uncertainty and frustration.",
+        "Introduce a loyalty program that rewards customers for consistent orders, which can help mitigate feelings of wasted money and enhance customer retention.",
+        "Streamline the refund process by automating it through the app, ensuring that customers receive timely notifications and updates about their refund status to improve satisfaction."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 5.18,
+      "relevance_score": 0.35,
+      "llm_score": 0.5,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues are somewhat relevant but too generic and lack specificity related to delivery or order problems.",
+      "is_generic": true,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly in enhancing service transparency, customer retention, and improving the refund process.",
+      "precision_at_k": 0.667,
+      "recall_at_k": 0.667,
+      "f1": 0.667,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.35,
+        "gap": 0.55,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "Zomato delivery delay complaints",
+      "company": "zomato",
+      "category": "normal",
+      "generated_issues": [
+        "payment/refund issue",
+        "poor service",
+        "waste of money"
+      ],
+      "recommendations": [
+        "Implement a real-time payment tracking system that provides users with instant updates on their payment status and refund requests.",
+        "Establish a dedicated customer service team specifically trained to handle service-related complaints, ensuring faster response times and resolution.",
+        "Introduce a loyalty program that rewards customers for consistent orders, which can help mitigate feelings of wasted money by offering discounts or free items after a certain number of orders."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 3.37,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are generic and do not specifically address the delivery delay complaints.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly the payment/refund issue and poor service. The loyalty program indirectly addresses the waste of money concern.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.0,
+        "gap": 0.9,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Zomato wrong order problems",
+      "company": "zomato",
+      "category": "normal",
+      "generated_issues": [
+        "payment/refund issue",
+        "poor service",
+        "waste of money"
+      ],
+      "recommendations": [
+        "Implement a streamlined payment and refund process with clear communication and real-time updates to reduce customer frustration.",
+        "Introduce a customer service training program for delivery personnel to enhance service quality and address negative sentiment.",
+        "Create a loyalty program that rewards customers for repeat orders, helping to mitigate feelings of wasted money and improve overall satisfaction."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 3.71,
+      "relevance_score": 0.14,
+      "llm_score": 0.2,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are somewhat related to the query but are too generic and do not specifically address the wrong order aspect.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly the payment/refund issue and poor service. The loyalty program indirectly addresses the waste of money concern, but could be more explicitly linked to that issue.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.14,
+        "gap": 0.76,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Zomato refund issues",
+      "company": "zomato",
+      "category": "normal",
+      "generated_issues": [
+        "payment/refund issue",
+        "poor service",
+        "waste of money"
+      ],
+      "recommendations": [
+        "Implement a streamlined payment and refund process with real-time tracking updates for users to monitor their transactions.",
+        "Introduce a customer service training program for delivery personnel to enhance service quality and reduce negative interactions.",
+        "Launch a loyalty program that rewards customers for repeat orders, helping to mitigate feelings of wasted money and improve overall satisfaction."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 4.79,
+      "relevance_score": 0.2,
+      "llm_score": 0.2,
+      "rule_score": 0.2,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are somewhat related to the query but are too generic and do not specifically address refund issues.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly the payment/refund issue and poor service. The loyalty program indirectly addresses the waste of money concern.",
+      "precision_at_k": 0.667,
+      "recall_at_k": 0.667,
+      "f1": 0.667,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.2,
+        "gap": 0.7,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "Zomato food quality complaints",
+      "company": "zomato",
+      "category": "normal",
+      "generated_issues": [
+        "payment/refund issue",
+        "poor service",
+        "waste of money"
+      ],
+      "recommendations": [
+        "Implement a streamlined payment and refund process with clear communication through in-app notifications to keep users informed about their transaction status.",
+        "Introduce a service quality monitoring system that allows customers to rate their experience immediately after delivery, enabling quick resolution of service issues.",
+        "Offer a loyalty program that rewards customers for consistent orders, providing discounts or credits to alleviate concerns about perceived waste of money."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 4.02,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues do not address food quality specifically and are too generic.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly the payment/refund issue and poor service. The loyalty program partially addresses the waste of money concern but could be more directly linked to the issue.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.0,
+        "gap": 0.9,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.4,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "delivery is always late",
+      "company": "swiggy",
+      "category": "ambiguous",
+      "generated_issues": [
+        "delivery delays",
+        "cold food upon arrival",
+        "poor customer support",
+        "wrong orders and quantities",
+        "lack of communication about issues"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system that provides customers with live updates on their order status, including estimated delivery times and any delays.",
+        "Introduce insulated packaging for all food items to maintain temperature during delivery and ensure food arrives hot.",
+        "Enhance customer support by integrating a chatbot for instant responses to common queries and establishing a dedicated support team for escalated issues.",
+        "Implement a double-check system for orders before dispatch to minimize errors in wrong orders and quantities.",
+        "Create a proactive communication strategy that informs customers about potential delays or issues with their orders via push notifications or SMS."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 5.74,
+      "relevance_score": 0.23,
+      "llm_score": 0.2,
+      "rule_score": 0.3,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues include some relevant points but also contain generic issues that do not directly address the specific complaint about delivery being late.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations directly address the identified issues with specific solutions, though some could be more detailed in implementation.",
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.333,
+      "f1": 0.25,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.23,
+        "gap": 0.67,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "customer support never responds",
+      "company": "uber",
+      "category": "ambiguous",
+      "generated_issues": [
+        "delivery delay",
+        "unexpected charges",
+        "inaccurate distance reporting"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system that provides customers with accurate delivery time estimates and alerts them of any delays as soon as they occur.",
+        "Introduce a transparent pricing calculator within the app that allows users to see potential charges before confirming their order, including surge pricing notifications.",
+        "Enhance the GPS accuracy by integrating advanced mapping technologies and regular audits to ensure distance reporting is precise, reducing discrepancies."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 6.23,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are unrelated to the query about customer support response, indicating a failure to address the specific concern.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.0,
+        "gap": 0.85,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "too many charges on my order",
+      "company": "zomato",
+      "category": "ambiguous",
+      "generated_issues": [
+        "payment/refund issue",
+        "poor service",
+        "waste of money"
+      ],
+      "recommendations": [
+        "Implement a streamlined payment and refund process with real-time tracking for users to see the status of their refunds.",
+        "Introduce a service quality training program for delivery personnel, focusing on customer interaction and timely deliveries to enhance overall service experience.",
+        "Create a loyalty program that rewards customers for their spending, offering discounts or credits for future orders to address concerns about value for money."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 5.49,
+      "relevance_score": 0.14,
+      "llm_score": 0.2,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are somewhat related to the query but are too generic and do not specifically address the concern about charges.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly the payment/refund issue and poor service. The loyalty program partially addresses the waste of money concern but could be more directly linked to that issue.",
+      "precision_at_k": 0.333,
+      "recall_at_k": 0.333,
+      "f1": 0.333,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.14,
+        "gap": 0.76,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "driver canceled my ride again",
+      "company": "uber",
+      "category": "ambiguous",
+      "generated_issues": [
+        "delivery delay",
+        "unexpected charges",
+        "inaccurate distance reporting"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system that provides customers with live updates on their delivery status to reduce perceived delivery delays.",
+        "Introduce a transparent pricing calculator in the app that allows users to see potential charges before confirming their order, addressing unexpected charges.",
+        "Enhance the GPS and mapping technology used for distance calculations to minimize discrepancies and improve accuracy in fare estimations."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 7.04,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are generic and do not address the specific concern of ride cancellation by the driver.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.0,
+        "gap": 0.85,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "food arrived cold and late",
+      "company": "swiggy",
+      "category": "ambiguous",
+      "generated_issues": [
+        "delivery delay",
+        "cold food",
+        "poor customer support"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system that provides customers with live updates on their order status and estimated delivery time to reduce delivery delays.",
+        "Introduce insulated delivery bags for all delivery personnel to ensure food remains hot during transit, addressing the issue of cold food.",
+        "Establish a customer support training program focused on communication skills and empathy to improve interactions and reduce instances of rude behavior from delivery personnel."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 7.45,
+      "relevance_score": 0.308,
+      "llm_score": 0.2,
+      "rule_score": 0.56,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "Issues identified are somewhat relevant but include a generic issue (poor customer support) that is not directly mentioned in the query.",
+      "is_generic": false,
+      "theme_overlap": 0.667,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.333,
+      "recall_at_k": 0.333,
+      "f1": 0.333,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.308,
+        "gap": 0.592,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.4,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "swiggi delivry prblms",
+      "company": "swiggy",
+      "category": "noisy",
+      "generated_issues": [
+        "poor delivery performance",
+        "high costs and pricing issues",
+        "bad customer service"
+      ],
+      "recommendations": [
+        "Implement a real-time delivery tracking system that allows customers to see the exact location of their delivery in relation to their order, improving transparency and trust.",
+        "Introduce a dynamic pricing model that adjusts delivery fees based on distance, time of day, and demand, ensuring competitive pricing while maintaining profitability.",
+        "Enhance customer service training programs focusing on empathy and problem-solving skills, and establish a dedicated support line for urgent issues to improve response times and customer satisfaction."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 8.05,
+      "relevance_score": 0.06,
+      "llm_score": 0.0,
+      "rule_score": 0.2,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are generic and do not specifically address the delivery problems mentioned in the query.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly with actionable solutions for delivery performance, pricing, and customer service.",
+      "precision_at_k": 0.667,
+      "recall_at_k": 0.667,
+      "f1": 0.667,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.06,
+        "gap": 0.79,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "uber pricng issus very bad",
+      "company": "uber",
+      "category": "noisy",
+      "generated_issues": [
+        "inaccurate distance reporting",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that updates customers on their trip progress and provides accurate distance reporting before the ride begins.",
+        "Introduce a surge charge calculator within the app that allows customers to see potential surge pricing based on demand forecasts before they request a ride.",
+        "Enhance delivery tracking by providing customers with live updates on their order status, including estimated delivery times and reasons for any delays."
+      ],
+      "confidence_score": 0.8,
+      "latency_seconds": 8.38,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues do not directly address the specific pricing issues mentioned in the query and are too generic.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.8,
+        "relevance": 0.0,
+        "gap": 0.8,
+        "calibrated": false,
+        "penalty": 0.2
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "zomto ordr wrng item recieved",
+      "company": "zomato",
+      "category": "noisy",
+      "generated_issues": [
+        "payment/refund issue",
+        "poor service",
+        "waste of money"
+      ],
+      "recommendations": [
+        "Implement a real-time payment tracking system that allows users to see the status of their transactions and refunds, reducing frustration and increasing transparency.",
+        "Introduce a customer service training program for delivery personnel to enhance service quality and address common complaints, focusing on communication and professionalism.",
+        "Create a loyalty program that rewards customers for repeat orders, helping to mitigate feelings of wasted money by offering discounts or free items based on order frequency."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 8.28,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are generic and do not specifically address the problem of receiving the wrong item.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly the payment/refund issue and poor service. The loyalty program also effectively addresses the waste of money concern. However, the customer service training could be more detailed in its approach.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.0,
+        "gap": 0.9,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "swiggy app nit working proprly",
+      "company": "swiggy",
+      "category": "noisy",
+      "generated_issues": [
+        "poor customer service",
+        "payment and refund issues",
+        "delivery problems"
+      ],
+      "recommendations": [
+        "Implement a dedicated customer service training program focusing on empathy and problem-solving skills to enhance the overall customer experience.",
+        "Introduce a streamlined payment and refund process with real-time tracking for customers to monitor their refund status and ensure timely resolutions.",
+        "Enhance order accuracy by integrating AI-driven order verification systems that cross-check items before dispatch and provide customers with a confirmation summary."
+      ],
+      "confidence_score": 0.87,
+      "latency_seconds": 5.75,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are generic and do not specifically address the app's functionality as mentioned in the query.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues with actionable solutions.",
+      "precision_at_k": 0.333,
+      "recall_at_k": 0.333,
+      "f1": 0.333,
+      "calibration": {
+        "confidence": 0.87,
+        "relevance": 0.0,
+        "gap": 0.87,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "uber drver vry rude behaviour",
+      "company": "uber",
+      "category": "noisy",
+      "generated_issues": [
+        "inaccurate distance reporting",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that updates users on the estimated distance and time remaining during their ride or delivery, ensuring transparency.",
+        "Introduce a pricing calculator in the app that allows users to see potential surge pricing based on historical data and current demand before they confirm their ride or order.",
+        "Enhance communication around delivery timelines by providing users with proactive updates on their order status, including potential delays, and offer compensation options for significant delays."
+      ],
+      "confidence_score": 0.87,
+      "latency_seconds": 5.42,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues do not address the specific complaint about the driver's rude behavior and are instead generic issues related to service.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions that enhance user experience and transparency.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.87,
+        "relevance": 0.0,
+        "gap": 0.87,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "swiggy bad",
+      "company": "swiggy",
+      "category": "edge",
+      "generated_issues": [
+        "poor customer service",
+        "high delivery charges",
+        "rude delivery executives",
+        "lack of resolution for complaints"
+      ],
+      "recommendations": [
+        "Implement a dedicated customer service training program for delivery executives focusing on communication and conflict resolution skills.",
+        "Introduce a tiered delivery charge system that offers lower rates during off-peak hours to encourage usage and reduce complaints about high costs.",
+        "Establish a feedback loop where customers can rate their delivery experience immediately after delivery, with follow-up actions for any negative feedback.",
+        "Create a complaint resolution task force that prioritizes and resolves customer complaints within 24 hours, ensuring timely communication and updates to customers."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 5.83,
+      "relevance_score": 0.35,
+      "llm_score": 0.5,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues identified are relevant to the query but are somewhat generic and could apply to many food delivery services, lacking specificity to Swiggy.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly in customer service and complaint resolution. However, the tiered delivery charge system could be more detailed in its implementation.",
+      "precision_at_k": 0.5,
+      "recall_at_k": 0.667,
+      "f1": 0.571,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.35,
+        "gap": 0.5,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.4,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "uber problems",
+      "company": "uber",
+      "category": "edge",
+      "generated_issues": [
+        "inaccurate distance reporting",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that updates customers on their trip progress and estimated arrival time, ensuring transparency in distance reporting.",
+        "Introduce a surge pricing notification system that alerts customers of potential surge charges before they confirm their ride or delivery, allowing them to make informed decisions.",
+        "Enhance the delivery tracking system with live updates and estimated delivery times, providing customers with more accurate information to reduce frustration over delays."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 3.32,
+      "relevance_score": 0.35,
+      "llm_score": 0.5,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues are somewhat relevant but lack specificity and depth, making them feel generic.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses the specific issues identified, providing clear and actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.35,
+        "gap": 0.5,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0.4,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "zomato feedback",
+      "company": "zomato",
+      "category": "edge",
+      "generated_issues": [
+        "payment/refund issue",
+        "poor service",
+        "waste of money"
+      ],
+      "recommendations": [
+        "Implement a streamlined payment and refund process with clear communication, including automated notifications for payment status and refund timelines.",
+        "Introduce a customer service training program for delivery personnel to enhance service quality and ensure consistent customer interactions.",
+        "Launch a loyalty program that rewards customers for repeat orders, addressing concerns about perceived value and waste of money."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 5.06,
+      "relevance_score": 0.41,
+      "llm_score": 0.5,
+      "rule_score": 0.2,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues are somewhat relevant but too generic and lack specificity related to Zomato feedback.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, particularly the payment/refund issue and poor service. The loyalty program partially addresses the waste of money concern, but could be more explicitly linked to that issue.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.41,
+        "gap": 0.49,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.4,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "swiggy issues today",
+      "company": "swiggy",
+      "category": "edge",
+      "generated_issues": [
+        "offer issue",
+        "customer support issue",
+        "delivery delay",
+        "payment/refund issue",
+        "general"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system for deliveries that provides customers with accurate ETAs and updates on their order status to reduce delivery delays.",
+        "Enhance customer support by introducing a 24/7 live chat feature within the app, allowing customers to get immediate assistance for their queries and issues.",
+        "Create a dedicated offers section in the app that highlights current promotions and discounts, ensuring customers are aware of available offers before placing an order.",
+        "Establish a robust feedback loop where customers can report issues with their orders directly in the app, and ensure timely follow-up to resolve payment/refund issues effectively.",
+        "Introduce a quality assurance check for deliveries to ensure that food is delivered hot and complete, reducing complaints about cold food and missing items."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 4.36,
+      "relevance_score": 0.41,
+      "llm_score": 0.5,
+      "rule_score": 0.2,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues listed are somewhat relevant but lack specificity and detail about today's context, making them appear generic.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.8,
+      "recommendation_reasoning": "Most recommendations are specific and directly address the identified issues, but some could be more tailored to individual problems.",
+      "precision_at_k": 0.4,
+      "recall_at_k": 0.667,
+      "f1": 0.5,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.41,
+        "gap": 0.44,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "what is wrong",
+      "company": "uber",
+      "category": "edge",
+      "generated_issues": [
+        "order failure",
+        "payment/refund issue",
+        "customer support issue"
+      ],
+      "recommendations": [
+        "Implement a real-time order tracking system to reduce order failures and cancellations by keeping customers informed about their order status.",
+        "Enhance the payment system by integrating multiple payment gateways and providing instant refund options to address payment and refund issues.",
+        "Establish a dedicated customer support team with 24/7 availability and implement a live chat feature to improve response times and overall support experience."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 5.95,
+      "relevance_score": 0.41,
+      "llm_score": 0.5,
+      "rule_score": 0.2,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are somewhat relevant but lack specificity and depth, making them appear generic.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues with actionable solutions.",
+      "precision_at_k": 0.333,
+      "recall_at_k": 0.333,
+      "f1": 0.333,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.41,
+        "gap": 0.49,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.4,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "swiggy one membership worth it?",
+      "company": "swiggy",
+      "category": "specific",
+      "generated_issues": [
+        "service stopped in city",
+        "hidden surge charges",
+        "increased prices and decreased quality"
+      ],
+      "recommendations": [
+        "Reassess and communicate service availability transparently, ensuring customers are informed about any city-specific service changes through in-app notifications and emails.",
+        "Implement a clear pricing breakdown feature in the app that shows the base price, any applicable surge charges, and discounts before the order is confirmed to eliminate hidden fees.",
+        "Conduct regular quality checks on partner restaurants and provide a feedback loop for customers to report quality issues, ensuring that only high-quality options are available on the platform.",
+        "Create a loyalty program that rewards customers for consistent orders, offering exclusive deals that are easy to understand and redeem, addressing mixed experiences with offers.",
+        "Enhance delivery tracking features to provide real-time updates on delivery status and estimated arrival times, addressing concerns about delivery service reliability."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 4.95,
+      "relevance_score": 0.35,
+      "llm_score": 0.5,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues raised are somewhat relevant to the value of the membership but are too generic and do not specifically address the membership itself.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.8,
+      "recommendation_reasoning": "The recommendations effectively address the identified issues with specific actions, particularly in terms of transparency and quality control. However, the loyalty program and delivery tracking enhancements, while beneficial, do not directly tackle the core issues of service availability and pricing transparency as strongly as the other recommendations.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.35,
+        "gap": 0.5,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "uber pool ride experience",
+      "company": "uber",
+      "category": "specific",
+      "generated_issues": [
+        "delivery delay",
+        "surge pricing",
+        "inaccurate distance measurement"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system that provides customers with accurate ETAs and updates on delivery status to reduce perceived delivery delays.",
+        "Introduce a transparent surge pricing notification system that clearly explains the reasons for price increases and offers alternatives during peak times.",
+        "Enhance the GPS and mapping technology used for distance measurement to ensure more accurate fare calculations and improve customer trust."
+      ],
+      "confidence_score": 0.82,
+      "latency_seconds": 4.04,
+      "relevance_score": 0.0,
+      "llm_score": 0.0,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues are generic and do not specifically relate to the Uber Pool experience.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.82,
+        "relevance": 0.0,
+        "gap": 0.82,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "zomato gold subscription issues",
+      "company": "zomato",
+      "category": "specific",
+      "generated_issues": [
+        "payment/refund issue",
+        "poor service quality",
+        "waste of money"
+      ],
+      "recommendations": [
+        "Implement a streamlined payment and refund process with clear communication on timelines and steps involved, including automated notifications for users.",
+        "Introduce a service quality monitoring system that includes real-time feedback from customers after each delivery, allowing for immediate corrective actions and service improvements.",
+        "Create a loyalty program that rewards customers for consistent orders and positive feedback, helping to mitigate feelings of wasted money and enhancing overall customer satisfaction."
+      ],
+      "confidence_score": 0.9,
+      "latency_seconds": 3.59,
+      "relevance_score": 0.14,
+      "llm_score": 0.2,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues mentioned are somewhat related to the subscription but lack specificity to Zomato Gold and its unique features.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues with actionable steps, though the loyalty program could be seen as somewhat indirect in addressing the waste of money issue.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.9,
+        "relevance": 0.14,
+        "gap": 0.76,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "swiggy super subscription complaints",
+      "company": "swiggy",
+      "category": "specific",
+      "generated_issues": [
+        "missing items and no compensation",
+        "high delivery costs",
+        "poor customer service",
+        "lack of payment offers"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system for missing items that automatically triggers a compensation process for customers, ensuring they receive refunds or credits without needing to contact customer service.",
+        "Introduce a tiered delivery fee structure that offers lower costs for frequent users or during off-peak hours, making delivery more affordable and competitive with Zomato.",
+        "Enhance customer service training programs to focus on empathy and problem-solving, and establish a dedicated support team for handling refund inquiries to expedite the process.",
+        "Launch a loyalty program that includes exclusive payment offers and discounts for repeat customers, incentivizing them to choose Swiggy over competitors."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 4.48,
+      "relevance_score": 0.35,
+      "llm_score": 0.5,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues mentioned are somewhat relevant to the subscription service but are too generic and do not specifically address the unique aspects of the 'Swiggy Super' subscription.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, providing actionable solutions rather than generic advice.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.35,
+        "gap": 0.5,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "uber auto vs cab pricing",
+      "company": "uber",
+      "category": "specific",
+      "generated_issues": [
+        "inaccurate distance reporting",
+        "unexpected surge charges",
+        "performance inconsistency"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that updates customers on the journey's progress and adjusts pricing accordingly to ensure transparency.",
+        "Introduce a surge charge notification system that alerts customers of potential surge pricing before they confirm their ride, allowing them to make informed decisions.",
+        "Establish a driver performance rating system that provides feedback to drivers and incentivizes high-quality service, ensuring a more consistent experience for customers."
+      ],
+      "confidence_score": 0.8,
+      "latency_seconds": 3.32,
+      "relevance_score": 0.14,
+      "llm_score": 0.2,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "Issues are somewhat related to pricing but do not specifically address the comparison between auto and cab pricing.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions that enhance transparency and consistency.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.8,
+        "relevance": 0.14,
+        "gap": 0.66,
+        "calibrated": false,
+        "penalty": 0.2
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "why swiggy is worse than zomato",
+      "company": "swiggy",
+      "category": "comparison",
+      "generated_issues": [
+        "poor customer support",
+        "delivery delays",
+        "unhygienic food",
+        "fake restaurant ratings",
+        "high delivery fees"
+      ],
+      "recommendations": [
+        "Implement a 24/7 customer support chat feature with AI assistance to handle common queries and escalate complex issues to human agents.",
+        "Introduce real-time tracking updates for customers during the delivery process to reduce perceived delivery delays and improve transparency.",
+        "Establish a strict hygiene certification process for restaurants and conduct regular audits to ensure compliance, displaying hygiene ratings prominently on the app.",
+        "Create a verified review system where customers can only rate restaurants after confirming their order, reducing the prevalence of fake ratings.",
+        "Offer a tiered delivery fee structure based on distance and order value, providing discounts for larger orders to enhance competitiveness with Zomato."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 4.55,
+      "relevance_score": 0.35,
+      "llm_score": 0.5,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues listed are somewhat relevant to the comparison but are generic and could apply to any food delivery service, not specifically Swiggy or Zomato.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions, enhancing customer experience and operational transparency.",
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.333,
+      "f1": 0.25,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.35,
+        "gap": 0.5,
+        "calibrated": false,
+        "penalty": 0.3
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": true,
+      "passed": false
+    },
+    {
+      "query": "swiggy delivery vs zomato delivery",
+      "company": "swiggy",
+      "category": "comparison",
+      "generated_issues": [
+        "delivery delay",
+        "customer support issue",
+        "order failure"
+      ],
+      "recommendations": [
+        "Implement a real-time tracking system for deliveries that provides customers with accurate ETAs and updates on their order status.",
+        "Enhance customer support by introducing a 24/7 chat support feature with AI-driven responses for common queries and a direct line to human agents for complex issues.",
+        "Establish a performance-based incentive program for delivery partners to improve punctuality and reduce delivery delays."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 3.49,
+      "relevance_score": 0.44,
+      "llm_score": 0.5,
+      "rule_score": 0.3,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues are somewhat relevant but lack specificity and depth in comparison to the query.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses the specific issues identified, providing actionable and targeted solutions.",
+      "precision_at_k": 0.333,
+      "recall_at_k": 0.333,
+      "f1": 0.333,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.44,
+        "gap": 0.41,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.8,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "what do angry swiggy customers say",
+      "company": "swiggy",
+      "category": "sentiment",
+      "generated_issues": [
+        "customer support issue",
+        "order failure",
+        "delivery delay"
+      ],
+      "recommendations": [
+        "Implement a dedicated customer support chatbot to handle common inquiries and complaints, ensuring quicker response times and reducing the load on human agents.",
+        "Enhance the order tracking system to provide real-time updates on order status and estimated delivery times, reducing customer anxiety during delays.",
+        "Introduce a compensation policy for order inaccuracies and delivery delays, clearly communicating this policy to customers to build trust and improve satisfaction."
+      ],
+      "confidence_score": 0.87,
+      "latency_seconds": 3.37,
+      "relevance_score": 0.41,
+      "llm_score": 0.5,
+      "rule_score": 0.2,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The generated issues are somewhat relevant but too generic and do not specifically capture the anger of customers.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.9,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, providing actionable solutions. However, the compensation policy could be more detailed.",
+      "precision_at_k": 0.333,
+      "recall_at_k": 0.333,
+      "f1": 0.333,
+      "calibration": {
+        "confidence": 0.87,
+        "relevance": 0.41,
+        "gap": 0.46,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.4,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "most common swiggy complaints",
+      "company": "swiggy",
+      "category": "sentiment",
+      "generated_issues": [
+        "payment/refund issue",
+        "delivery delay",
+        "customer support issue",
+        "order failure"
+      ],
+      "recommendations": [
+        "Implement a dedicated payment support team to handle payment and refund issues with a guaranteed response time of 24 hours.",
+        "Introduce real-time tracking updates for deliveries, including estimated arrival times and notifications for delays, to keep customers informed.",
+        "Enhance customer support by integrating AI chatbots for immediate assistance and ensuring human agents are available for complex issues during peak hours.",
+        "Establish a compensation policy for order failures, offering customers discounts or credits for future orders to improve satisfaction.",
+        "Regularly train delivery personnel on time management and customer interaction to reduce delivery delays and enhance the overall customer experience."
+      ],
+      "confidence_score": 0.85,
+      "latency_seconds": 5.6,
+      "relevance_score": 0.41,
+      "llm_score": 0.5,
+      "rule_score": 0.2,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues listed are somewhat relevant but lack specificity and depth, making them feel generic.",
+      "is_generic": false,
+      "theme_overlap": 0.333,
+      "recommendation_score": 0.8,
+      "recommendation_reasoning": "The recommendations are specific and directly address the identified issues, but some could be more detailed in implementation.",
+      "precision_at_k": 0.25,
+      "recall_at_k": 0.333,
+      "f1": 0.286,
+      "calibration": {
+        "confidence": 0.85,
+        "relevance": 0.41,
+        "gap": 0.44,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0.4,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    },
+    {
+      "query": "why do people hate uber",
+      "company": "uber",
+      "category": "sentiment",
+      "generated_issues": [
+        "inaccurate distance reporting",
+        "unexpected surge charges",
+        "delivery delays"
+      ],
+      "recommendations": [
+        "Implement a real-time distance tracking feature that updates customers on the distance and estimated arrival time during their ride or delivery.",
+        "Introduce a surge pricing notification system that alerts customers of potential surge charges before they confirm their ride or order, including a breakdown of factors affecting the surge.",
+        "Enhance the delivery tracking system to provide customers with live updates and estimated delivery times, along with a dedicated support channel for addressing delays."
+      ],
+      "confidence_score": 0.8,
+      "latency_seconds": 3.27,
+      "relevance_score": 0.35,
+      "llm_score": 0.5,
+      "rule_score": 0.0,
+      "judge_method": "hybrid (LLM 70% + rule 30%)",
+      "relevance_reasoning": "The issues listed are relevant to the query but are somewhat generic and do not capture the emotional aspect of 'hate' towards Uber.",
+      "is_generic": false,
+      "theme_overlap": 0.0,
+      "recommendation_score": 1.0,
+      "recommendation_reasoning": "Each recommendation directly addresses a specific issue with actionable solutions.",
+      "precision_at_k": 0.0,
+      "recall_at_k": 0.0,
+      "f1": 0,
+      "calibration": {
+        "confidence": 0.8,
+        "relevance": 0.35,
+        "gap": 0.45,
+        "calibrated": false,
+        "penalty": 0.0
+      },
+      "baseline_f1": 0,
+      "pipeline_better_than_baseline": false,
+      "passed": false
+    }
+  ]
+}

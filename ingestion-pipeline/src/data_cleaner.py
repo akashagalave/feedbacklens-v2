@@ -19,7 +19,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df.drop_duplicates(subset=["review"])
 
-    df = df[df["review"].str.len() >= 20]
+    df = df[df["review"].str.len() >= 10]
 
     df["company"] = df["company"].str.lower()
     df["issue"] = df["issue"].str.lower()

@@ -9,9 +9,7 @@ LATENCY_SLA_SECONDS = 30.0
 ERROR_RATE_THRESHOLD = 0.10
 
 
-# ══════════════════════════════════════════════════════
-# RESPONSE VALIDATOR — single helper, no duplicate code
-# ══════════════════════════════════════════════════════
+
 def validate_analyze_response(response) -> tuple[bool, str]:
     """
     Returns (success, reason)
@@ -49,10 +47,6 @@ def validate_analyze_response(response) -> tuple[bool, str]:
 class FeedbackLensUser(HttpUser):
     wait_time = between(2, 6)
 
-    # ══════════════════════════════════════════════════
-    # REAL QUERIES — varied, noisy, ambiguous
-    # Matches eval dataset for consistency
-    # ══════════════════════════════════════════════════
     swiggy_queries = [
         {"query": "What are swiggy delivery issues?",        "company": "swiggy"},
         {"query": "Swiggy late delivery complaints",          "company": "swiggy"},
@@ -86,10 +80,7 @@ class FeedbackLensUser(HttpUser):
         {"query": "zomato feedback",                        "company": "zomato"},
     ]
 
-    # ══════════════════════════════════════════════════
-    # TASKS — weighted by real traffic distribution
-    # Swiggy 3x, Uber 2x, Zomato 1x, Health 1x
-    # ══════════════════════════════════════════════════
+
     @task(3)
     def analyze_swiggy(self):
         self._run_analyze(

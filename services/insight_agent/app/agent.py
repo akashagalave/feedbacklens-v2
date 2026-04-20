@@ -1,142 +1,4 @@
-# from langchain_openai import ChatOpenAI
-# from langchain_core.messages import SystemMessage, HumanMessage
-# from langsmith import traceable
-# from sentence_transformers import SentenceTransformer
-# from .config import settings
-# from .prompts import INSIGHT_PROMPT
-# from .hybrid_search import hybrid_search
-# from .cache import make_cache_key, get_cached, set_cache
-# import json
-# import numpy as np
-# import sys
-# import os
 
-# sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
-# from shared.logger import get_logger
-
-# logger = get_logger("insight-agent")
-
-# llm = ChatOpenAI(
-#     model="gpt-4o-mini",
-#     temperature=0.1,
-#     max_tokens=300,
-#     timeout=30,
-#     api_key=settings.openai_api_key
-# )
-
-# _filter_model = None
-
-# def get_filter_model():
-#     global _filter_model
-#     if _filter_model is None:
-#         _filter_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-#     return _filter_model
-
-
-# def filter_chunks_by_query(query: str, chunks: list, threshold: float = 0.3) -> list:
-#     """Keep only chunks semantically relevant to the query"""
-#     if not chunks:
-#         return chunks
-#     model = get_filter_model()
-#     query_emb = model.encode(query)
-#     filtered = []
-#     for chunk in chunks:
-#         chunk_emb = model.encode(chunk.review)
-#         sim = float(np.dot(query_emb, chunk_emb) / (
-#             np.linalg.norm(query_emb) * np.linalg.norm(chunk_emb) + 1e-8
-#         ))
-#         if sim >= threshold:
-#             filtered.append(chunk)
-#     logger.info(f"Filtered {len(chunks)} → {len(filtered)} chunks (threshold={threshold})")
-#     return filtered if filtered else chunks[:5]
-
-
-# @traceable(name="insight-agent")
-# async def generate_insights(
-#     query: str,
-#     company: str,
-#     focus: str = None,
-#     top_k: int = 10
-# ) -> dict:
-
-#     cache_key = make_cache_key(query, company, focus)
-#     cached = await get_cached(cache_key)
-#     if cached:
-#         return cached
-
-#     chunks = await hybrid_search(query, company, focus, top_k)
-
-#     if not chunks:
-#         logger.warning(f"No chunks found for company={company}")
-#         return {
-#             "top_issues": ["No data found for this company"],
-#             "patterns": [],
-#             "sample_reviews": [],
-#             "confidence_score": 0.0
-#         }
-
-#     # Query-aware filtering
-#     filtered_chunks = filter_chunks_by_query(query, chunks, threshold=0.25)
-
-#     reviews_text = "\n".join([
-#         f"- [{c.issue}] {c.review}" for c in filtered_chunks[:8]
-#     ])
-
-#     sample_reviews = [c.review for c in filtered_chunks[:3]]
-#     logger.info(f"Using {len(filtered_chunks)} filtered chunks for {company}")
-
-#     user_prompt = f"""Query: "{query}"
-# Company: {company}
-# Focus area: {focus if focus else 'general'}
-
-# Reviews:
-# {reviews_text}
-
-# Return ONLY issues directly related to the query above."""
-
-#     try:
-#         response = await llm.ainvoke([
-#             SystemMessage(content=INSIGHT_PROMPT),
-#             HumanMessage(content=user_prompt)
-#         ])
-
-#         content = response.content.strip()
-#         logger.info(f"RAW LLM: {content[:100]}")
-
-#         if content.startswith("```"):
-#             content = content.split("```")[1]
-#             if content.startswith("json"):
-#                 content = content[4:]
-#             content = content.strip()
-
-#         result = json.loads(content)
-
-#         top_issues = result.get("top_issues", [])[:3]
-#         patterns = result.get("patterns", [])[:2]
-#         confidence = result.get("confidence_score", 0.0)
-
-#         final = {
-#             "top_issues": top_issues,
-#             "patterns": patterns,
-#             "sample_reviews": sample_reviews,
-#             "confidence_score": confidence
-#         }
-
-#         await set_cache(cache_key, final)
-#         logger.info(f"Insights: {top_issues}")
-#         return final
-
-#     except json.JSONDecodeError as e:
-#         logger.error(f"JSON parse error: {e}")
-#         return {
-#             "top_issues": ["Error parsing insights"],
-#             "patterns": [],
-#             "sample_reviews": sample_reviews,
-#             "confidence_score": 0.0
-#         }
-#     except Exception as e:
-#         logger.error(f"LLM error: {e}")
-#         raise
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from langsmith import traceable
@@ -171,27 +33,7 @@ def get_filter_model():
         _filter_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
     return _filter_model
 
-# def normalize_query(query: str) -> str:
-#     corrections = {
-#         "delivry": "delivery", "delievry": "delivery", "dlivery": "delivery",
-#         "prblms": "problems", "problms": "problems",
-#         "wrng": "wrong", "wrang": "wrong",
-#         "issus": "issues", "isues": "issues", "isssues": "issues",
-#         "pricng": "pricing", "priing": "pricing",
-#         "drver": "driver", "drivr": "driver",
-#         "custmer": "customer", "costomer": "customer",
-#         "behaviur": "behavior", "behavoir": "behavior",
-#         "recieved": "received", "recived": "received",
-#         "nit": "not", "wont": "not",
-#         "vry": "very", "veyr": "very",
-#         "zomto": "zomato", "swiggi": "swiggy",
-#     }
-#     words = query.lower().split()
-#     corrected = [corrections.get(w, w) for w in words]
-#     normalized = " ".join(corrected)
-#     if normalized != query.lower():
-#         logger.info(f"Query normalized: '{query}' → '{normalized}'")
-#     return normalized
+
 
 def normalize_query(query: str) -> str:
     original_query = query
@@ -217,7 +59,7 @@ def normalize_query(query: str) -> str:
     corrected = [corrections.get(w, w) for w in words]
     normalized = " ".join(corrected)
 
-    # 🔥 semantic synonym mapping (IMPORTANT)
+    #Semantic synonym mapping
     synonyms = {
         "charges": "pricing",
         "expensive": "pricing",
@@ -242,7 +84,6 @@ def normalize_query(query: str) -> str:
         "missing": "missing"
     }
 
-    # append semantic hints
     for word, mapped in synonyms.items():
         if word in normalized:
             normalized += f" ({mapped})"
@@ -285,7 +126,7 @@ def standardize_issues(issues: list) -> list:
         if matched_label:
             standardized.append(matched_label)
 
-    # remove duplicates + limit
+    
     return list(dict.fromkeys(standardized))[:3]
 def is_vague_query(query: str) -> bool:
     words = query.strip().split()
@@ -385,15 +226,12 @@ Reviews:
 
         result = json.loads(content)
 
-    # -------------------------------
-    # 🔥 STRICT ISSUE PROCESSING
-    # -------------------------------
+  
         raw_issues = result.get("top_issues", [])
 
-    # Step 1: primary standardization
         standardized = standardize_issues(raw_issues)
 
-    # Step 2: fallback if empty
+ 
         if not standardized:
             logger.warning("Standardization failed → applying fallback mapping")
 
@@ -432,15 +270,10 @@ Reviews:
 
             standardized = list(dict.fromkeys(forced))
 
-    # -------------------------------
-    # 🔥 HYBRID + SMART NORMALIZATION
-    # -------------------------------
         top_issues = []
 
-    # Step 3: keep standardized issues
         top_issues.extend(standardized)
 
-    # Step 4: smart raw normalization (FIXED 🔥)
         for issue in raw_issues:
             issue_lower = issue.lower()
 
@@ -460,9 +293,6 @@ Reviews:
             if 1 <= len(normalized_issue.split()) <= 5:
                 top_issues.append(normalized_issue)
 
-    # -------------------------------
-    # 🔥 SEMANTIC BOOST (FIXED 🔥)
-    # -------------------------------
         semantic_boost = {
             "pricing issue": ["charges", "high cost", "expensive"],
             "delivery delay": ["late delivery", "slow delivery"],
@@ -480,19 +310,12 @@ Reviews:
             for key in semantic_boost:
                 if key in clean_issue:
                     boosted.extend(semantic_boost[key])
-
         top_issues = boosted
-
-    # Step 6: deduplicate + limit
         top_issues = list(dict.fromkeys(top_issues))[:4]
 
-    # Step 7: safety
         if not top_issues:
             top_issues = ["general issue"]
 
-    # -------------------------------
-    # 📊 OTHER FIELDS
-    # -------------------------------
         patterns = result.get("patterns", [])[:2]
         confidence = result.get("confidence_score", 0.0)
 

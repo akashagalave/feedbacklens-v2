@@ -1,0 +1,103 @@
+[
+  {
+    "query": "food arrived cold again",
+    "issues": [
+      "food quality issue",
+      "cold food"
+    ],
+    "relevance": 0.62,
+    "rec_score": 0.75,
+    "final": 0.66,
+    "passed": false,
+    "latency": 5.72
+  },
+  {
+    "query": "uber driver cancel problem",
+    "issues": [
+      "cancellation issue",
+      "ride cancelled",
+      "driver cancelled"
+    ],
+    "relevance": 0.7,
+    "rec_score": 0.75,
+    "final": 0.71,
+    "passed": true,
+    "latency": 4.44
+  },
+  {
+    "query": "too many charges on my ride",
+    "issues": [
+      "charges",
+      "high cost"
+    ],
+    "relevance": 0.48,
+    "rec_score": 0.75,
+    "final": 0.56,
+    "passed": false,
+    "latency": 5.94
+  },
+  {
+    "query": "Swiggy refund problems",
+    "issues": [
+      "refund issue",
+      "refund delay",
+      "money not returned"
+    ],
+    "relevance": 0.96,
+    "rec_score": 0.75,
+    "final": 0.9,
+    "passed": true,
+    "latency": 4.97
+  },
+  {
+    "query": "why is delivery late",
+    "issues": [
+      "delivery delay",
+      "late delivery",
+      "slow delivery"
+    ],
+    "relevance": 0.96,
+    "rec_score": 0.75,
+    "final": 0.9,
+    "passed": true,
+    "latency": 6.14
+  },
+  {
+    "query": "uber pricing issues",
+    "issues": [
+      "charges",
+      "high cost"
+    ],
+    "relevance": 0.45,
+    "rec_score": 0.75,
+    "final": 0.54,
+    "passed": false,
+    "latency": 4.92
+  },
+  {
+    "query": "zomato wrong order",
+    "issues": [
+      "order accuracy issue",
+      "wrong order",
+      "missing items"
+    ],
+    "relevance": 0.79,
+    "rec_score": 0.75,
+    "final": 0.78,
+    "passed": true,
+    "latency": 6.14
+  },
+  {
+    "query": "swiggi delivry prblms",
+    "issues": [
+      "delivery delay",
+      "late delivery",
+      "slow delivery"
+    ],
+    "relevance": 0.97,
+    "rec_score": 0.9,
+    "final": 0.95,
+    "passed": true,
+    "latency": 4.63
+  }
+]

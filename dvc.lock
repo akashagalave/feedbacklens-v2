@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data/rag_ready.csv
       hash: md5
-      md5: a8508bf9da9b6b55091a4e05060841e1
-      size: 60882
+      md5: 6f32802d1faf3310493e689153a8a8e3
+      size: 74482
     - path: ingestion-pipeline/src/data_cleaner.py
       hash: md5
       md5: 003933e395b8e56ff9fe98aac76d3950
@@ -18,15 +18,15 @@ stages:
     outs:
     - path: data/cleaned.csv
       hash: md5
-      md5: 257829cd87af8a44765b906d82d9ee39
-      size: 61029
+      md5: 0a43966ee23678a64180513703d42722
+      size: 74371
   embed:
     cmd: python ingestion-pipeline/src/embedder.py
     deps:
     - path: data/cleaned.csv
       hash: md5
-      md5: 257829cd87af8a44765b906d82d9ee39
-      size: 61029
+      md5: 0a43966ee23678a64180513703d42722
+      size: 74371
     - path: ingestion-pipeline/src/embedder.py
       hash: md5
       md5: f85dfd7ecb26e8250cc36083fba8324f
@@ -38,19 +38,19 @@ stages:
     outs:
     - path: data/embeddings.npy
       hash: md5
-      md5: aee473a10567288e25aceefae4cd202c
-      size: 238208
+      md5: 75bcdaf01a55f35f10d2aa7bf49afa73
+      size: 502400
   index:
     cmd: python ingestion-pipeline/src/qdrant_indexer.py
     deps:
     - path: data/cleaned.csv
       hash: md5
-      md5: 257829cd87af8a44765b906d82d9ee39
-      size: 61029
+      md5: 0a43966ee23678a64180513703d42722
+      size: 74371
     - path: data/embeddings.npy
       hash: md5
-      md5: aee473a10567288e25aceefae4cd202c
-      size: 238208
+      md5: 75bcdaf01a55f35f10d2aa7bf49afa73
+      size: 502400
     - path: ingestion-pipeline/src/qdrant_indexer.py
       hash: md5
       md5: 24f87364e3433dbc48fbdf64dfd91d7f

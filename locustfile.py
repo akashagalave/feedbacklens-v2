@@ -124,10 +124,6 @@ class FeedbackLensUser(HttpUser):
             else:
                 response.failure(f"Health check failed: {response.status_code}")
 
-    # ══════════════════════════════════════════════════
-    # HELPER — single validate function
-    # Classifies: timeout, http error, parse, content
-    # ══════════════════════════════════════════════════
     def _run_analyze(self, payload: dict, name: str):
         with self.client.post(
             "/analyze",

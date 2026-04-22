@@ -15,11 +15,22 @@ from shared.logger import get_logger
 
 logger = get_logger("gateway")
 
-# Rate limiter
-limiter = Limiter(key_func=get_remote_address)
 
+limiter = Limiter(key_func=get_remote_address)
 app = FastAPI(title="FeedbackLens Gateway", version="2.0.0")
 app.state.limiter = limiter
+
+_review_tracker: dict[str, list[tuple[float, int]]] = {}
+MAX_REVIEWS_PER_MINUTE = 200
+
+def _within_review_limit(ip: str, count: int) -> bool:
+    now = time.time()
+    _review_tracker.setdefault(ip, [])
+    _review_tracker[ip] = [(t, c) for t, c in _review_tracker[ip] if now - t < 60]
+    if sum(c for _, c in _review_tracker[ip]) + count > MAX_REVIEWS_PER_MINUTE:
+        return False
+    _review_tracker[ip].append((now, count))
+    return True
 
 
 @app.exception_handler(RateLimitExceeded)
@@ -114,6 +125,17 @@ async def analyze(request: Request, body: QueryRequest):
 @app.post("/batch")
 @limiter.limit("10/minute")
 async def batch(request: Request, body: BatchRequest):
+    # volume check: max 200 total reviews/min per IP (10 req × 20 reviews)
+    if not _within_review_limit(request.client.host, len(body.reviews)):
+        RATE_LIMIT_COUNT.labels(endpoint="/batch").inc()
+        return JSONResponse(
+            status_code=429,
+            content={
+                "error": "Review volume limit exceeded",
+                "detail": f"Max {MAX_REVIEWS_PER_MINUTE} reviews/minute. Try again in 60s.",
+                "retry_after": "60 seconds"
+            }
+        )
     try:
         async with httpx.AsyncClient(timeout=180.0) as client:
             response = await client.post(
